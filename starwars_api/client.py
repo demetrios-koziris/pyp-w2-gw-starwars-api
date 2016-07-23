@@ -69,3 +69,8 @@ class SWAPIClient(object):
         if film_id:
             return self._get_swapi('/api/films/{}'.format(film_id))
         return self._get_swapi('/api/films', **params)
+    
+    def get_planets(self, planet_id=None, **params):
+        if planet_id:
+            return self._get_swapi('/api/planets/{}'.format(planet_id))
+        return self._get_swapi('/api/planets', **params)

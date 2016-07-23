@@ -35,6 +35,16 @@ class BaseStarWarsAPITestCase(unittest.TestCase):
             ('GET', r'{}/films\?page=1', 200, 'films_page_1.json'),
             ('GET', r'{}/films\?page=2', 404, 'films_page_2.json'),
             ('GET', r'{}/films', 200, 'films_page_1.json'),
+            
+            # DETAIL /planets
+            ('GET', r'{}/planets/100', 404, 'planets_id_100.json'),
+            ('GET', r'{}/planets/1', 200, 'planets_id_1.json'),
+
+            # LIST /planets
+            ('GET', r'{}/planets\?page=1', 200, 'planets_page_1.json'),
+            ('GET', r'{}/planets\?page=2', 200, 'planets_page_2.json'),
+            ('GET', r'{}/planets\?page=3', 404, 'planets_page_3.json'),
+            ('GET', r'{}/planets', 200, 'planets_page_1.json'),
         ]
         for method, uri, status, fixture_file in fake_responses:
             fixture_path = os.path.join(settings.BASE_DIR, 'tests',
