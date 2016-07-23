@@ -89,9 +89,10 @@ class BaseQuerySet(object):
         page were all consumed.
         """
         if self.counter < len(self.current_page['results']):
-            model_to_return = self.model_cls(self.current_page['results'][self.counter])
+            model_json = self.current_page['results'][self.counter]
+            model_object = self.model_cls(model_json)
             self.counter += 1
-            return model_to_return
+            return model_object
         try:
             next_page_num = self.current_page['next'].split('page=')[1]
             self.current_page = self.get_page(page=next_page_num)
